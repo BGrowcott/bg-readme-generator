@@ -1,32 +1,35 @@
 
-# Big Boy Project
+# a wild bao bao
 
 ## Description
 
-Description of my project
+a wild jichao sucks icecream 
 
 ## Table of Contents
 
-- Installation [go to Installation](#-installation)
-- Usage [go to Usage](#-usage)
-- License [go to License](#-license)
-- Contributing [go to Contributing](#-contributing)
-- Tests [go to Tests](#-tests)
-- Questions [go to Questions](#-questions)
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [License](#license)
+4. [Contributing](#contributing)
+5. [Tests](#tests)
+6. [Questions](#questions)
 
 ## Installation
 
-- do this
-- do that
-- then this
-- then that
-- done
+- find a wild natural jichao
+- find her favorite flavor ice cream
+- sorry you found the wrong flavor idiot
 
 ## Usage
+
+to annoy you :))
 
 ## License
 
 ## Contributing
+
+- southgate footballman
+- random name which i didnt come up with 
 
 ## Tests
 
