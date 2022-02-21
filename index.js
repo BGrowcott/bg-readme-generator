@@ -52,14 +52,15 @@ const promptThree = (promptTwoAnswers) => {
 
 const promptFour = (promptThreeAnswers) => {
   finalAnswers = { ...finalAnswers, promptThreeAnswers };
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message:
-        `Ok ${finalAnswers.name}, ${finalAnswers.title} looking good so far.`
-    },
-  ]);
+  return finalAnswers
+//   return inquirer.prompt([
+//     {
+//       type: "input",
+//       name: "name",
+//       message:
+//         `Ok ${finalAnswers.name}, ${finalAnswers.title} looking good so far.`
+//     },
+//   ]);
 };
 
 const generateReadme = ({ title, description, promptThreeAnswers }) =>
