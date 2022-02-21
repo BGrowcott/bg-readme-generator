@@ -6,7 +6,7 @@ Description goes here
 
 ## Table of Contents
 
-- Installation [go to Installation](#-installation)
+- [Installation](#installation)
 - Usage [go to Usage](#-usage)
 - License [go to License](#-license)
 - Contributing [go to Contributing](#-contributing)
