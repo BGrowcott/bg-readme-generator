@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 let finalAnswers = {};
-let minAnsLength = 1; //update once complete
+let minAnsLength = 20; //update once complete
 
 const promptOne = () => {
   return inquirer.prompt([
@@ -10,6 +10,12 @@ const promptOne = () => {
       name: "name",
       message:
         "Hello and welcome to your professional README generator.\n You will be prompted with a series of questions - please fill in answers carefully!\n First things first, who am I talking to?",
+      validate(answer) {
+        if (!answer) {
+          return `At least type something in!`;
+        }
+        return true;
+      },
     },
   ]);
 };
@@ -32,7 +38,7 @@ const promptTwo = (promptOneAnswers) => {
       type: "input",
       name: "description",
       message:
-        "Really? Hmm that sounds... interesting.\n Lets see if you can really convince me - write me a compelling description of your project:",
+        "Really? That sounds... interesting.\n Lets see if you can really convince me - write me a compelling description of your project:",
       validate(answer) {
         if (answer.length < minAnsLength) {
           return `Come on ${promptOneAnswers.name}, you can do better than that - try to use at least 20 letters`;
@@ -43,7 +49,7 @@ const promptTwo = (promptOneAnswers) => {
     {
       type: "input",
       name: "install",
-      message: `Wowza! Sorry I ever doubted you ${promptOneAnswers.name}.\n Ok, lets talk installation. How many step by step instructions are you going to need here? Give me a number:`,
+      message: `Wowza! Sorry I ever doubted you ${promptOneAnswers.name}.\n Ok, let's talk installation. How many step by step instructions are you going to need here? Give me a number:`,
       validate(answer) {
         if (isNaN(answer)) {
           return "Please enter a number";
@@ -181,11 +187,11 @@ function licenseBadge(license) {
   if (license === "Apache License 2.0") {
     return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
   }
-  if (license === "MIT License"){
-      return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+  if (license === "MIT License") {
+    return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
   }
-  if (license === "GNU General Public License v3.0"){
-      return '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
+  if (license === "GNU General Public License v3.0") {
+    return "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
   }
 }
 
@@ -205,14 +211,16 @@ const generateReadme = ({
   license,
 }) =>
   `
+${licenseBadge(license)}
+  
 # ${title}
 
 ## Description
 
 ${description}
 
-${licenseBadge(license)}
 - - - -
+
 ## Table of Contents
 
 1. [Installation](#installation)
@@ -260,7 +268,7 @@ const init = () => {
     .then(promptSix)
     .then(returnFinal)
     .then((answers) => fs.writeFileSync("README.md", generateReadme(answers)))
-    .then(() => console.log("Successfully wrote to README.md"))
+    .then(() => console.log("OMG! You did it! Check out your readme.md"))
     .catch((err) => console.error(err));
 };
 

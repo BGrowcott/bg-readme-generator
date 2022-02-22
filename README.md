@@ -1,12 +1,14 @@
 
-# Readme Generator
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  
+# Professional Readme Generator
 
 ## Description
 
-A projessional readme generator - uses NodeJS to create quality readme file.
+Uses NodeJS and Inquirer to ask a user a series of questions, and then creates a README.md file according to their answers.
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 - - - -
+
 ## Table of Contents
 
 1. [Installation](#installation)
@@ -18,32 +20,31 @@ A projessional readme generator - uses NodeJS to create quality readme file.
 
 ## Installation
 
-- init npm
-- npm install inquirer
-- done
+- Git Clone this repo to your desired directory.
+- Open the directory in Terminal/bash/etc
+- npm install inquirer and run index.js
 
 ## Usage
 
-This project will make your life easier when making a readme file for any project. Simply run in node and answer a series of questions about your project.
+Use this tool to create a quality readme for any project. Will stop you forgetting parts of the readme and gives you a nice layout with no effort.
 
 ## License
 
-This project is covered under Apache License 2.0
+This project is covered under MIT License
 
 ## Contributing
 
-- Ben G - Github
-- Tom T - Github
+- Ben Growcott - https://github.com/BGrowcott/bg-readme-generator
 
 ## Tests
 
-Simply run it
+Simply run in node!
 
 ## Questions
 
 If you have any questions or suggestions please contact me via my GitHub or email:
 
-[GitHub](githubhere)
+[GitHub](https://github.com/BGrowcott)
 
-[Email](mailto:emailhere)
+[Email](mailto:bgrowcott@hotmail.co.uk)
   
