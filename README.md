@@ -1,10 +1,12 @@
 
-# b
+# Readme Generator
 
 ## Description
 
-b
+A projessional readme generator - uses NodeJS to create quality readme file.
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+- - - -
 ## Table of Contents
 
 1. [Installation](#installation)
@@ -16,27 +18,32 @@ b
 
 ## Installation
 
-- b
+- init npm
+- npm install inquirer
+- done
 
 ## Usage
 
-b
+This project will make your life easier when making a readme file for any project. Simply run in node and answer a series of questions about your project.
 
 ## License
 
+This project is covered under Apache License 2.0
+
 ## Contributing
 
-- b
+- Ben G - Github
+- Tom T - Github
 
 ## Tests
 
-undefined
+Simply run it
 
 ## Questions
 
 If you have any questions or suggestions please contact me via my GitHub or email:
 
-[GitHub](undefined)
+[GitHub](githubhere)
 
-[Email](mailto:undefined)
+[Email](mailto:emailhere)
   

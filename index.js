@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 let finalAnswers = {};
-let minAnsLength = 1 //update once complete 
+let minAnsLength = 1; //update once complete
 
 const promptOne = () => {
   return inquirer.prompt([
@@ -34,7 +34,7 @@ const promptTwo = (promptOneAnswers) => {
       message:
         "Really? Hmm that sounds... interesting.\n Lets see if you can really convince me - write me a compelling description of your project:",
       validate(answer) {
-        if (answer < minAnsLength) {
+        if (answer.length < minAnsLength) {
           return `Come on ${promptOneAnswers.name}, you can do better than that - try to use at least 20 letters`;
         }
         return true;
@@ -71,7 +71,7 @@ const promptThree = (promptTwoAnswers) => {
           return `At least type something in!`;
         }
         return true;
-      }
+      },
     });
   }
   return inquirer.prompt(array);
@@ -84,11 +84,26 @@ const promptFour = (promptThreeAnswers) => {
       type: "input",
       name: "usage",
       message: `Ok ${finalAnswers.name}, ${finalAnswers.title}'s Readme is looking good so far.\n Let's get an idea now of what this thing actually does!\n Describe the uses for and how to use the project:`,
+      validate(answer) {
+        if (!answer) {
+          return `At least type something in!`;
+        }
+        return true;
+      },
     },
     {
-      type: "number",
+      type: "input",
       name: "contributors",
       message: `Blimey. And how many poor souls have you roped into this? Or is it just you ${finalAnswers.name}? Give me a number of contributors:`,
+      validate(answer) {
+        if (isNaN(answer)) {
+          return "Please enter a number";
+        }
+        if (answer > 20) {
+          return "Woah there, I think you mistyped that - Please enter no more than 20 contributors";
+        }
+        return true;
+      },
     },
   ]);
 };
@@ -101,6 +116,12 @@ const promptFive = (promptFourAnswers) => {
       type: "input",
       name: `contributor${i + 1}`,
       message: `Give me the name and GitHub for person ${i + 1}:`,
+      validate(answer) {
+        if (!answer) {
+          return `At least type something in!`;
+        }
+        return true;
+      },
     });
   }
   return inquirer.prompt(array);
@@ -114,28 +135,62 @@ const promptSix = (promptFiveAnswers) => {
       name: "tests",
       message:
         "Ok, so how can we be sure this thing really works?\n Can you give me some instructions for testing:",
+      validate(answer) {
+        if (!answer) {
+          return `At least type something in!`;
+        }
+        return true;
+      },
     },
     {
       type: "input",
       name: "github",
-      message: `Ok ${finalAnswers.name}, so what if I have questions?\n Please provide you GitHub URL:`,
+      message: `Ok ${finalAnswers.name}, so what if I have questions?\n Please provide your GitHub URL:`,
+      validate(answer) {
+        if (!answer) {
+          return `At least type something in!`;
+        }
+        return true;
+      },
     },
     {
       type: "input",
       name: "email",
       message: `And your email address:`,
+      validate(answer) {
+        if (!answer) {
+          return `At least type something in!`;
+        }
+        return true;
+      },
     },
     {
       type: "list",
       name: "license",
-      choices: ["option1", "option2", "option3"],
+      choices: [
+        "Apache License 2.0",
+        "MIT License",
+        "GNU General Public License v3.0",
+      ],
       message: `Nearly there now ${finalAnswers.name}! We just need to choose the right license.`,
     },
   ]);
 };
 
+function licenseBadge(license) {
+  if (license === "Apache License 2.0") {
+    return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+  }
+  if (license === "MIT License"){
+      return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+  }
+  if (license === "GNU General Public License v3.0"){
+      return '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
+  }
+}
+
 const returnFinal = (promptSixAnswers) => {
-  return (finalAnswers = { ...finalAnswers, promptSixAnswers });
+  return (finalAnswers = { ...finalAnswers, ...promptSixAnswers });
 };
 
 const generateReadme = ({
@@ -147,6 +202,7 @@ const generateReadme = ({
   tests,
   github,
   email,
+  license,
 }) =>
   `
 # ${title}
@@ -155,6 +211,8 @@ const generateReadme = ({
 
 ${description}
 
+${licenseBadge(license)}
+- - - -
 ## Table of Contents
 
 1. [Installation](#installation)
@@ -173,6 +231,8 @@ ${description}
 ${usage}
 
 ## License
+
+This project is covered under ${license}
 
 ## Contributing
 
