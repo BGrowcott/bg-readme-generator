@@ -1,35 +1,37 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const chalk = require('chalk')
 let finalAnswers = {};
 let minAnsLength = 20; //update once complete
 
+  // first question gains users name to make experience more personal
 const promptOne = () => {
   return inquirer.prompt([
     {
       type: "input",
       name: "name",
       message:
-        "Hello and welcome to your professional README generator.\n You will be prompted with a series of questions - please fill in answers carefully!\n First things first, who am I talking to?",
+        chalk.greenBright("Hello and welcome to your professional README generator.\n You will be prompted with a series of questions - please fill in answers carefully!\n First things first, who am I talking to?"),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
     },
   ]);
 };
-
+  // This set of questions get the title, description and number of installations instructions needed.
 const promptTwo = (promptOneAnswers) => {
   finalAnswers = { ...promptOneAnswers };
   const promptTwoAnswers = inquirer.prompt([
     {
       type: "input",
       name: "title",
-      message: `Lovely! Thanks ${promptOneAnswers.name}! Ok now, ${promptOneAnswers.name} - what is the title of your project?`,
+      message: chalk.greenBright(`Lovely! Thanks ${promptOneAnswers.name}! Ok now, ${promptOneAnswers.name} - what is the title of your project?`),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -38,10 +40,10 @@ const promptTwo = (promptOneAnswers) => {
       type: "input",
       name: "description",
       message:
-        "Really? That sounds... interesting.\n Lets see if you can really convince me - write me a compelling description of your project:",
+      chalk.greenBright("Really? That sounds... interesting.\n Lets see if you can really convince me - write me a compelling description of your project:"),
       validate(answer) {
         if (answer.length < minAnsLength) {
-          return `Come on ${promptOneAnswers.name}, you can do better than that - try to use at least 20 letters`;
+          return chalk.red(`Come on ${promptOneAnswers.name}, you can do better than that - try to use at least 20 letters`);
         }
         return true;
       },
@@ -49,13 +51,13 @@ const promptTwo = (promptOneAnswers) => {
     {
       type: "input",
       name: "install",
-      message: `Wowza! Sorry I ever doubted you ${promptOneAnswers.name}.\n Ok, let's talk installation. How many step by step instructions are you going to need here? Give me a number:`,
+      message: chalk.greenBright(`Wowza! Sorry I ever doubted you ${promptOneAnswers.name}.\n Ok, let's talk installation. How many step by step instructions are you going to need here? Give me a number:`),
       validate(answer) {
         if (isNaN(answer)) {
           return "Please enter a number";
         }
         if (answer > 20) {
-          return "Woah there, I think you mistyped that - Please enter no more than 20 instructions";
+          return chalk.red("Woah there, I think you mistyped that - Please enter no more than 20 instructions");
         }
         return true;
       },
@@ -63,7 +65,7 @@ const promptTwo = (promptOneAnswers) => {
   ]);
   return promptTwoAnswers;
 };
-
+  // Prompt three generates installation questions for the number of times input in promptTwo
 const promptThree = (promptTwoAnswers) => {
   finalAnswers = { ...finalAnswers, ...promptTwoAnswers };
   const array = [];
@@ -71,10 +73,10 @@ const promptThree = (promptTwoAnswers) => {
     array.push({
       type: "input",
       name: `installQuestion${i + 1}`,
-      message: `Please enter instruction ${i + 1}:`,
+      message: chalk.greenBright(`Please enter instruction ${i + 1}:`),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -83,16 +85,17 @@ const promptThree = (promptTwoAnswers) => {
   return inquirer.prompt(array);
 };
 
+  // prompt four get the usage for the project and the number of contributors
 const promptFour = (promptThreeAnswers) => {
   finalAnswers = { ...finalAnswers, promptThreeAnswers };
   return inquirer.prompt([
     {
       type: "input",
       name: "usage",
-      message: `Ok ${finalAnswers.name}, ${finalAnswers.title}'s Readme is looking good so far.\n Let's get an idea now of what this thing actually does!\n Describe the uses for and how to use the project:`,
+      message: chalk.greenBright(`Ok ${finalAnswers.name}, ${finalAnswers.title}'s Readme is looking good so far.\n Let's get an idea now of what this thing actually does!\n Describe the uses for and how to use the project:`),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -100,20 +103,20 @@ const promptFour = (promptThreeAnswers) => {
     {
       type: "input",
       name: "contributors",
-      message: `Blimey. And how many poor souls have you roped into this? Or is it just you ${finalAnswers.name}? Give me a number of contributors:`,
+      message: chalk.greenBright(`Blimey. And how many poor souls have you roped into this? Or is it just you ${finalAnswers.name}? Give me a number of contributors:`),
       validate(answer) {
         if (isNaN(answer)) {
           return "Please enter a number";
         }
         if (answer > 20) {
-          return "Woah there, I think you mistyped that - Please enter no more than 20 contributors";
+          return chalk.red("Woah there, I think you mistyped that - Please enter no more than 20 contributors");
         }
         return true;
       },
     },
   ]);
 };
-
+  // promptFive generates questions for the number of contributors input in prompt four
 const promptFive = (promptFourAnswers) => {
   finalAnswers = { ...finalAnswers, ...promptFourAnswers };
   const array = [];
@@ -121,10 +124,10 @@ const promptFive = (promptFourAnswers) => {
     array.push({
       type: "input",
       name: `contributor${i + 1}`,
-      message: `Give me the name and GitHub for person ${i + 1}:`,
+      message: chalk.greenBright(`Give me the name and GitHub for person ${i + 1}:`),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -132,7 +135,7 @@ const promptFive = (promptFourAnswers) => {
   }
   return inquirer.prompt(array);
 };
-
+  // promptSix asks for tests, github, email and license
 const promptSix = (promptFiveAnswers) => {
   finalAnswers = { ...finalAnswers, promptFiveAnswers };
   return inquirer.prompt([
@@ -140,10 +143,10 @@ const promptSix = (promptFiveAnswers) => {
       type: "input",
       name: "tests",
       message:
-        "Ok, so how can we be sure this thing really works?\n Can you give me some instructions for testing:",
+      chalk.greenBright("Ok, so how can we be sure this thing really works?\n Can you give me some instructions for testing:"),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -151,10 +154,10 @@ const promptSix = (promptFiveAnswers) => {
     {
       type: "input",
       name: "github",
-      message: `Ok ${finalAnswers.name}, so what if I have questions?\n Please provide your GitHub URL:`,
+      message: chalk.greenBright(`Ok ${finalAnswers.name}, so what if I have questions?\n Please provide your GitHub URL:`),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -162,10 +165,10 @@ const promptSix = (promptFiveAnswers) => {
     {
       type: "input",
       name: "email",
-      message: `And your email address:`,
+      message: chalk.greenBright(`And your email address:`),
       validate(answer) {
         if (!answer) {
-          return `At least type something in!`;
+          return chalk.red(`At least type something in!`);
         }
         return true;
       },
@@ -178,11 +181,12 @@ const promptSix = (promptFiveAnswers) => {
         "MIT License",
         "GNU General Public License v3.0",
       ],
-      message: `Nearly there now ${finalAnswers.name}! We just need to choose the right license.`,
+      message: chalk.greenBright(`Nearly there now ${finalAnswers.name}! We just need to choose the right license.`),
     },
   ]);
 };
 
+// function for generating the correct license badge
 function licenseBadge(license) {
   if (license === "Apache License 2.0") {
     return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
@@ -195,10 +199,12 @@ function licenseBadge(license) {
   }
 }
 
+// completes the answers object
 const returnFinal = (promptSixAnswers) => {
   return (finalAnswers = { ...finalAnswers, ...promptSixAnswers });
 };
 
+// generates the readme string with the input from the inquirer prompts
 const generateReadme = ({
   title,
   description,
@@ -240,7 +246,7 @@ ${usage}
 
 ## License
 
-This project is covered under ${license}
+This project is covered under the ${license}
 
 ## Contributing
 
@@ -252,13 +258,14 @@ ${tests}
 
 ## Questions
 
-If you have any questions or suggestions please contact me via my GitHub or email:
+If you have any questions or suggestions please contact me via my GitHub or Email:
 
 [GitHub](${github})
 
 [Email](mailto:${email})
   `;
 
+  // runs through all prompts and creates the readme file
 const init = () => {
   promptOne()
     .then(promptTwo)
@@ -268,7 +275,7 @@ const init = () => {
     .then(promptSix)
     .then(returnFinal)
     .then((answers) => fs.writeFileSync("README.md", generateReadme(answers)))
-    .then(() => console.log("OMG! You did it! Check out your readme.md"))
+    .then(() => console.log("OMG! You did it! Check out your README.md"))
     .catch((err) => console.error(err));
 };
 
