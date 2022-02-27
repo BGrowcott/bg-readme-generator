@@ -5,7 +5,7 @@
 
 ## Description
 
-This application uses NodeJs and Inquirer to prompt a user with a series of questions relating to the users project. A README.md file is then created for the user according to the answer they gave.
+This application uses NodeJs and Inquirer to prompt a user with a series of questions relating to the users project. A README.md file is then created for the user according to the answer they gave. This README was created using the programme.
 
 - - - -
 
@@ -29,6 +29,8 @@ This application uses NodeJs and Inquirer to prompt a user with a series of ques
 ## Usage
 
 This application can be used with almost any project to create a professional README. The generator will create a README with a nice layout, a table of contents with anchor tags for navigation and give the user a choice of licenses to add.
+
+Please check out this video of the application: [Usage Video](https://drive.google.com/file/d/1Ze0CiKmSniz7MLPRURrTHLuwa0SruLo1/view?usp=sharing)
 
 ## License
 
