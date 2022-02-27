@@ -1,8 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const chalk = require('chalk')
+const figlet = require('figlet')
 let finalAnswers = {};
-let minAnsLength = 20; //update once complete
+let minAnsLength = 20;
 
   // first question gains users name to make experience more personal
 const promptOne = () => {
@@ -11,7 +12,7 @@ const promptOne = () => {
       type: "input",
       name: "name",
       message:
-        chalk.greenBright("Hello and welcome to your professional README generator.\n You will be prompted with a series of questions - please fill in answers carefully!\n First things first, who am I talking to?"),
+        chalk.greenBright(`Hello and welcome to your professional README generator.\n You will be prompted with a series of questions - please fill in answers carefully!\n First things first, who am I talking to?`),
       validate(answer) {
         if (!answer) {
           return chalk.red(`At least type something in!`);
@@ -246,7 +247,7 @@ ${usage}
 
 ## License
 
-This project is covered under the ${license}
+This project is covered under the ${license}.
 
 ## Contributing
 

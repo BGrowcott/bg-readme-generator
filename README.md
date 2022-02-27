@@ -1,11 +1,11 @@
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   
 # Professional Readme Generator
 
 ## Description
 
-Uses NodeJS and Inquirer to ask a user a series of questions, and then creates a README.md file according to their answers. This readme was created using the programme!
+This application uses NodeJs and Inquirer to prompt a user with a series of questions relating to the users project. A README.md file is then created for the user according to the answer they gave.
 
 - - - -
 
@@ -20,18 +20,19 @@ Uses NodeJS and Inquirer to ask a user a series of questions, and then creates a
 
 ## Installation
 
-- git clone this repository
-- Navigate to the correct directory in your command line - Terminal/Bash/etc
-- Enter: npm install inquirer & npm install chalk
-- node index.js
+- Git clone this repository
+- Navigate to the correct directory in your command line
+- Enter: npm install
+- To start the programme enter: node index.js
+- Answer the questions!
 
 ## Usage
 
-Use this tool to create a quality readme for any project. The readme will include headers and a table of contents that can be used to navigate. Will save a lot of time setting up a layout and you won't ever leave anything out of a readme again.
+This application can be used with almost any project to create a professional README. The generator will create a README with a nice layout, a table of contents with anchor tags for navigation and give the user a choice of licenses to add.
 
 ## License
 
-This project is covered under the Apache License 2.0
+This project is covered under the MIT License.
 
 ## Contributing
 
@@ -39,7 +40,7 @@ This project is covered under the Apache License 2.0
 
 ## Tests
 
-Simply run in node!
+Not applicable at this time.
 
 ## Questions
 
